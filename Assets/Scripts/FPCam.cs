@@ -7,8 +7,8 @@ public class FPCam : MonoBehaviour
     private float xAxis;
     private float yAxis;
 
-    float xAxisTurnRate = 360f;
-    float yAxisTurnRate = 360f;
+    float xAxisTurnRate = 720f;
+    float yAxisTurnRate = 720f;
 
     // Start is called before the first frame update
     void Start()
