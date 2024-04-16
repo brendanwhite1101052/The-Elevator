@@ -19,8 +19,16 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveDirection.Normalize();
-        moveDirection.y = -1f;
+        if(Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
+        {
+            moveDirection.y += 0.5f * Time.deltaTime;
+        }
+        if(moveDirection.y > 1 && !characterController.isGrounded)
+        {
+            moveDirection.Normalize();
+            moveDirection.y = -1f;
+        }
+        
 
         characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
