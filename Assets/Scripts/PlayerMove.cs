@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
 
     public float moveSpeed = 5f;
     private Vector3 moveDirection;
+    private bool onGround;
 
     // Start is called before the first frame update
     void Start()
@@ -19,16 +20,17 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
+        CheckFloor();
+        if(Input.GetKeyDown(KeyCode.Space) && onGround)
         {
-            moveDirection.y += 0.5f * Time.deltaTime;
+            moveDirection.y += 2.5f * Time.deltaTime;
+            Debug.Log("Space pressed");
         }
-        if(moveDirection.y > 1 && !characterController.isGrounded)
+        if(moveDirection.y > 100.0f && !onGround)
         {
-            moveDirection.Normalize();
-            moveDirection.y = -1f;
+            moveDirection.y -= 1.0f * Time.deltaTime;
+            Debug.Log("Height reached");
         }
-        
 
         characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
@@ -45,5 +47,15 @@ public class PlayerMove : MonoBehaviour
         right.Normalize();
 
         moveDirection = (forwardInput * forward) + (rightInput * right);
+    }
+
+    public void CheckFloor()
+    {
+        if (Physics.Raycast(characterController.transform.position, Vector3.down, 1.08f))
+        {
+            onGround = true;
+        } else {
+            onGround = false;
+        }
     }
 }
