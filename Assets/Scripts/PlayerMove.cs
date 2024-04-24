@@ -8,8 +8,12 @@ public class PlayerMove : MonoBehaviour
     CharacterController characterController;
 
     public float moveSpeed = 5f;
+    public float jumpHeight = 5.0f;
+    public float maxHeight = 4.0f;
     private Vector3 moveDirection;
     private bool onGround;
+    private bool isJumping;
+    private bool isFalling;
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +27,35 @@ public class PlayerMove : MonoBehaviour
         CheckFloor();
         if(Input.GetKeyDown(KeyCode.Space) && onGround)
         {
-            moveDirection.y += 2.5f * Time.deltaTime;
-            Debug.Log("Space pressed");
+            isJumping = true;
+            isFalling = false;
         }
-        if(moveDirection.y > 100.0f && !onGround)
+        if(isJumping)
         {
-            moveDirection.y -= 1.0f * Time.deltaTime;
-            Debug.Log("Height reached");
+            
+            if(!isFalling)
+            {
+                moveDirection.y = 1;
+                characterController.Move(moveDirection * 2.0f * Time.deltaTime);
+                Debug.Log("Jumping");
+                if(characterController.transform.position.y > maxHeight)
+                {
+                    isFalling = true;
+                }
+            }
+            if(isFalling)
+            {
+                moveDirection.y = -1;
+                characterController.Move(moveDirection * Time.deltaTime);
+                Debug.Log("Should be falling");
+                if(onGround)
+                {
+                    isFalling = false;
+                    isJumping = false;
+                }
+            }
         }
+        
 
         characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
