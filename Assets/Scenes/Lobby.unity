@@ -642,6 +642,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  jumpHeight: 5
+  maxHeight: 4
 --- !u!114 &367043992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2987,7 +2989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6535236102433415239, guid: 726580d060e9dfd49b08482c652f1b58, type: 3}
       propertyPath: m_Name
-      value: Elevator
+      value: ElevatorDoors
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726580d060e9dfd49b08482c652f1b58, type: 3}
