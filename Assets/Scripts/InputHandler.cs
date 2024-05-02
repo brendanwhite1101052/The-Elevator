@@ -7,12 +7,14 @@ public class InputHandler : MonoBehaviour
 
     PlayerMove playerMove;
     FPCam fpCam;
+    PlayerInteraction playerInteraction;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
         fpCam = GetComponent<FPCam>();
+        playerInteraction = GetComponent<PlayerInteraction>();
     }
 
     // Update is called once per frame
@@ -20,6 +22,7 @@ public class InputHandler : MonoBehaviour
     {
         HandleMoveInput();
         HandleCameraInput();
+        HandleInteractionInput();
     }
 
     void HandleMoveInput()
@@ -34,5 +37,13 @@ public class InputHandler : MonoBehaviour
     {
         fpCam.AddXAxisInput(Input.GetAxis("Mouse Y") * Time.deltaTime);
         fpCam.AddYAxisInput(Input.GetAxis("Mouse X") * Time.deltaTime);
+    }
+
+    void HandleInteractionInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            playerInteraction.TryInteract();
+        }
     }
 }
