@@ -25,6 +25,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(newSceneName);
     }
 
+    public static void ElevatorLoad(string newSceneName)
+    {
+        
+        SceneManager.LoadScene(newSceneName);
+    }
     public static void Quit()
     {
         Application.Quit();
