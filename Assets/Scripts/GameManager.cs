@@ -25,11 +25,17 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(newSceneName);
     }
 
-    public static void ElevatorLoad(string newSceneName)
+    public void ElevatorLoad(string newSceneName)
     {
-        
-        SceneManager.LoadScene(newSceneName);
+        StartCoroutine(Wait(newSceneName));
     }
+
+    IEnumerator Wait(string sceneName)
+    {
+        yield return new WaitForSeconds(9);
+        SceneManager.LoadScene(sceneName);
+    }
+
     public static void Quit()
     {
         Application.Quit();
